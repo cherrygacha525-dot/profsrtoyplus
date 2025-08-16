@@ -1,0 +1,152 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f7f7f7;
+  color: #212529;
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-width: 100vw;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body.dark {
+  background-color: #23272b;
+  color: #e4e6eb;
+}
+
+/* Темная тема для элементов */
+body.dark .container,
+body.dark .bg-white,
+body.dark .border,
+body.dark .modal-content {
+  background-color: #23272b !important;
+  color: #e4e6eb !important;
+  border-color: #444 !important;
+}
+body.dark .border { border-color: #444 !important; }
+body.dark .hover-shadow:hover { background: #23272b !important; }
+body.dark .btn-success {
+  background-color: #388e3c !important;
+  border-color: #388e3c !important;
+  color: #fff !important;
+}
+body.dark .text-success { color: #81c784 !important; }
+body.dark .shadow-sm { box-shadow: 0 2px 16px rgba(0,0,0,0.25) !important; }
+
+.bg-image {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: url('img/Contruction bien.jfif') no-repeat center center / cover;
+  opacity: 0.25;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+body.dark .bg-image { filter: brightness(0.6); opacity: 0.3; }
+
+.container {
+  min-width: 100vw;
+  max-width: 100vw;
+}
+
+header h1, header h2 {
+  text-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.btn-success { font-weight: 600; font-size: 1.2rem; }
+footer { font-weight: 500; }
+
+/* Карточки услуг */
+.hover-shadow {
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.hover-shadow:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  background: #f8f9fa;
+}
+
+/* --- ГЛАВНЫЕ исправления: фоновые и портфолио фото --- */
+.main-header-bg,
+.services-bg {
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.45;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(4px);
+}
+
+.portfolio-img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  margin-bottom: 0.5rem;
+  cursor: zoom-in;
+  transition: box-shadow 0.2s;
+}
+.portfolio-img:hover {
+  box-shadow: 0 4px 24px rgba(56,142,60,0.15);
+}
+
+/* Модальные окна на весь экран */
+.modal-fullscreen .modal-content {
+  background: #fff;
+  border-radius: 0;
+  min-height: 100vh;
+}
+body.dark .modal-fullscreen .modal-content {
+  background: #23272b;
+  color: #e4e6eb;
+}
+
+/* Кнопка переключения темы */
+#theme-toggle {
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для секции контактов */
+section[style*="background"] {
+  box-shadow: 0 2px 16px rgba(44, 62, 80, 0.07);
+}
+
+/* Стили для карты */
+iframe {
+  border-radius: 8px;
+  border: none;
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 991px) {
+  .services-row {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  .service-card {
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+@media (max-width: 767px) {
+  .container { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .portfolio-img { height: 120px; }
+}

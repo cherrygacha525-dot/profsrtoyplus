@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Проф Строй Плюс</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #fff;
+      color: #222;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .main-header {
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .main-header-bg,
+    .services-bg {
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 120vw; height: 120%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.50;
+      z-index: 0;
+      pointer-events: none;
+      filter: blur(2.7px) brightness(1.12);
+    }
+    .main-header-content {
+      position: relative;
+      z-index: 1;
+    }
+    .main-header .logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #388e3c;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .main-header .subtitle {
+      font-size: 1.25rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+    .services-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .service-card {
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      min-width: 260px;
+      max-width: 320px;
+      flex: 1 1 300px;
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 260px;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      z-index: 1;
+    }
+    .service-card:hover {
+      box-shadow: 0 4px 24px rgba(56,142,60,0.08);
+      border-color: #b2dfdb;
+    }
+    .service-card .icon {
+      font-size: 2.5rem;
+      color: #388e3c;
+      margin-bottom: 1rem;
+    }
+    .service-card h5 {
+      font-weight: 700;
+      color: #388e3c;
+      margin-bottom: 0.75rem;
+    }
+    .portfolio-img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      margin-bottom: 0.5rem;
+      cursor: zoom-in;
+      transition: box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .portfolio-img:hover {
+      box-shadow: 0 4px 24px rgba(56,142,60,0.15);
+    }
+    .contacts-block {
+      background: #f3fcf7;
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid #e0e0e0;
+    }
+    .contacts-block .contact-item {
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+      text-align: center;
+    }
+    .contacts-block .btn {
+      display: block;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      padding: 0.8rem 2.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+    }
+    .contacts-block .text-muted {
+      text-align: center;
+      font-size: 1.15rem;
+      margin-top: 2rem;
+    }
+    .footer {
+      border-top: 1px solid #e0e0e0;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      color: #888;
+      font-size: 1.1rem;
+    }
+    .modal-img-bg,
+    .modal-service-bg {
+      position: fixed;
+      z-index: 1050;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center;
+      cursor: default;
+      overflow: auto;
+    }
+    .modal-service-bg::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; width: 100%; height: 100%;
+      background: url('img/photo5.jpg') center center / cover no-repeat;
+      filter: blur(7px) brightness(1.12) grayscale(0.12);
+      opacity: 0.65;
+      z-index: 0;
+    }
+    .modal-service-content {
+      position: relative;
+      background: rgba(255,255,255,0.97);
+      border-radius: 22px;
+      box-shadow: 0 8px 42px #0003;
+      padding: 3.2rem 2.3rem 2.2rem 2.3rem;
+      max-width: 600px;
+      width: 96vw;
+      z-index: 1;
+      color: #1c2320;
+      text-align: left;
+      margin: 32px 0;
+    }
+    .modal-service-content h3 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #388e3c;
+      margin-bottom: 1.4rem;
+    }
+    .modal-service-content .modal-task {
+      font-size: 1.13rem;
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+    }
+    .modal-service-content .btn-consult {
+      font-size: 1.2rem;
+      background: #388e3c;
+      color: #fff;
+      border-radius: 24px;
+      padding: 0.9rem 2.7rem;
+      border: none;
+      font-weight: 600;
+      margin: 0 auto;
+      display: block;
+      transition: background 0.18s;
+      box-shadow: 0 2px 12px #0002;
+    }
+    .modal-service-content .btn-consult:hover {
+      background: #246124;
+      color: #fff;
+    }
+    .modal-close-btn {
+      position: fixed;
+      top: 32px;
+      right: 44px;
+      z-index: 2000;
+      color: #fff;
+      font-size: 3rem;
+      font-weight: 700;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      filter: drop-shadow(0 2px 12px #000a);
+      transition: color 0.2s;
+    }
+    .modal-close-btn:hover {
+      color: #ff5555;
+    }
+    @media (max-width: 991px) {
+      .services-row {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: center;
+      }
+      .service-card {
+        max-width: 100%;
+        min-width: 0;
+      }
+      .modal-service-content {
+        padding: 2rem 0.5rem 2rem 0.5rem;
+      }
+    }
+    @media (max-width: 767px) {
+      .main-header .logo { font-size: 2rem; }
+      .portfolio-img { height: 110px; }
+      .contacts-block { padding: 1.2rem 0.7rem; }
+      .contacts-block .contact-item { font-size: 1.1rem; }
+      .modal-close-btn { top: 10px; right: 18px; font-size: 2rem; }
+      .modal-service-content h3 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="max-width: 1100px;">
+    <header class="main-header mb-5">
+      <img src="img/photo6.jpg" alt="Фон" class="main-header-bg">
+      <div class="main-header-content">
+        <div class="logo">Проф Строй Плюс</div>
+        <div class="subtitle">
+          Строительство кирпичных и каркасных домов под ключ.<br>
+          Производство каркасных стен. Полный цикл отделочных работ.<br>
+          <a href="portfolio.html" class="btn btn-outline-success mt-3">Наше портфолио</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="services" class="mb-5" style="position:relative;">
+      <img src="img/photo4.jpg" alt="Фон" class="services-bg">
+      <div style="position:relative; z-index:1;">
+        <h2 class="display-6 fw-bold mb-4 text-success text-center">Наши услуги</h2>
+        <div class="services-row">
+          <a class="service-card service-click" data-service="f1" tabindex="0">
+            <div class="icon">🏗️</div>
+            <h5>Делаем фундамент любой сложности</h5>
+            <div>Ленточный, плитный, свайный, монолитный — быстро, качественно и с учётом особенностей участка.</div>
+          </a>
+          <a class="service-card service-click" data-service="f2" tabindex="0">
+            <div class="icon">🧱</div>
+            <h5>Кирпичное строительство</h5>
+            <div>Дома из облицовочного кирпича по современным технологиям, строго по проекту.</div>
+          </a>
+          <a class="service-card service-click" data-service="f3" tabindex="0">
+            <div class="icon">🏡</div>
+            <h5>Каркасные дома</h5>
+            <div>Изготовление и монтаж каркасных стен на вашем участке быстро, качественно, с гарантией.</div>
+          </a>
+          <a class="service-card service-click" data-service="f4" tabindex="0">
+            <div class="icon">🏭</div>
+            <h5>Производство стен</h5>
+            <div>Заводское изготовление каркасных панелей по вашим чертежам и размерам.</div>
+          </a>
+          <a class="service-card service-click" data-service="f5" tabindex="0">
+            <div class="icon">🎨</div>
+            <h5>Полный цикл отделки</h5>
+            <div>Внутренняя и внешняя отделка "под ключ", строго по смете и срокам.</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="mb-5">
+      <h2 class="display-6 fw-bold mb-4 text-success text-center">Портфолио объектов</h2>
+      <div class="row g-4">
+        <div class="col-12 col-md-4">
+          <img src="img/photo1.jpg" alt="Объект 1" class="portfolio-img enlargeable" />
+          <div class="fw-semibold text-center">Объект 1</div>
+        </div>
+        <div class="col-12 col-md-4">
+          <img src="img/photo2.jpg" alt="Объект 2" class="portfolio-img enlargeable" />
+          <div class="fw-semibold text-center">Объект 2</div>
+        </div>
+        <div class="col-12 col-md-4">
+          <img src="img/photo3.jpg" alt="Объект 3" class="portfolio-img enlargeable" />
+          <div class="fw-semibold text-center">Объект 3</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts" class="contacts-block mb-5">
+      <h2 class="display-5 fw-bold mb-4 text-success text-center" style="font-size:2.2rem;">Контакты</h2>
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 mb-3 text-center">
+          <div class="contact-item mb-4"><b>E-mail:</b> <a href="mailto:evgonchar@bk.ru" class="text-success">evgonchar@bk.ru</a></div>
+          <div class="contact-item mb-4"><b>График:</b> Пн–Сб, 9:00–19:00</div>
+          <a href="https://t.me/profstroyplus_bot" target="_blank" class="btn btn-success btn-lg mt-3 mb-4">Подать заявку</a>
+          <div class="mt-4 text-muted">
+            Подать заявку можно в нашем боте в Telegram — отвечаем быстро!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer text-center">
+      <div>&copy; 2025 Проф Строй Плюс. Все права защищены.</div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Модальные окна для услуг
+    const serviceDetails = {
+      f1: {
+        title: "🏗 Делаем фундамент любой сложности",
+        content: `
+          <div class="modal-task"><b>Задача:</b><br>
+          Оказывать услуги по строительству фундаментов различных типов (ленточный, плитный, свайный, монолитный) с учётом геологических и ландшафтных особенностей участка. Обеспечить качество, соблюдение технологии и сроков выполнения.</div>`
+      },
+      f2: {
+        title: "🧱 Кирпичное строительство",
+        content: `
+          <div class="modal-task"><b>Задача:</b><br>
+          Строительство жилых и коммерческих зданий из облицовочного кирпича по индивидуальному проекту. Применение современных строительных технологий и соблюдение всех нормативов. Контроль за качеством на всех этапах.</div>`
+      },
+      f3: {
+        title: "🏡 Каркасные дома",
+        content: `
+          <div class="modal-task"><b>Задача:</b><br>
+          Изготовление и установка каркасных домов и стеновых конструкций на участке заказчика. Обеспечить точность монтажа, качество материалов и соблюдение сроков. Гарантия на выполненные работы.</div>`
+      },
+      f4: {
+        title: "🏭 Производство стен",
+        content: `
+          <div class="modal-task"><b>Задача:</b><br>
+          Заводское изготовление каркасных панелей по техническому заданию или чертежам клиента. Контроль качества на производстве, точность размеров и соответствие стандартам сборки.</div>`
+      },
+      f5: {
+        title: "🎨 Полный цикл отделки",
+        content: `
+          <div class="modal-task"><b>Задача:</b><br>
+          Выполнение внутренней и внешней отделки зданий "под ключ". Работа строго по утверждённой смете, соблюдение сроков и стандартов качества. Использование современных материалов и технологий.</div>`
+      }
+    };
+
+    document.querySelectorAll('.service-card.service-click').forEach(card => {
+      card.addEventListener('click', function(e) {
+        const key = card.dataset.service;
+        if (!serviceDetails[key]) return;
+        const modal = document.createElement('div');
+        modal.className = 'modal-service-bg';
+        modal.innerHTML = `
+          <button class="modal-close-btn" aria-label="Закрыть">&#10006;</button>
+          <div class="modal-service-content">
+            <h3>${serviceDetails[key].title}</h3>
+            ${serviceDetails[key].content}
+            <a href="https://t.me/profstroyplus_bot" target="_blank" class="btn-consult">Заказать консультацию</a>
+          </div>
+        `;
+        modal.querySelector('.modal-close-btn').onclick = e => {
+          e.stopPropagation();
+          modal.remove();
+        };
+        modal.querySelector('.btn-consult').onclick = e => {
+          e.stopPropagation();
+          // Не закрываем модалку при открытии ТГ, но можно закрыть если надо
+        };
+        modal.onclick = () => modal.remove();
+        modal.querySelector('.modal-service-content').onclick = e => e.stopPropagation();
+        document.body.appendChild(modal);
+      });
+    });
+
+    // Увеличение фото в портфолио с крестом
+    document.querySelectorAll('.enlargeable').forEach(img => {
+      img.addEventListener('click', function(event) {
+        event.stopPropagation();
+        const modal = document.createElement('div');
+        modal.className = 'modal-img-bg';
+        modal.innerHTML = `
+          <button class="modal-close-btn" aria-label="Закрыть">&#10006;</button>
+          <img src="${img.src}" alt="${img.alt}">
+        `;
+        modal.querySelector('.modal-close-btn').onclick = e => {
+          e.stopPropagation();
+          modal.remove();
+        };
+        modal.querySelector('img').onclick = e => e.stopPropagation();
+        modal.onclick = () => modal.remove();
+        document.body.appendChild(modal);
+      });
+    });
+  </script>
+</body>
+</html>

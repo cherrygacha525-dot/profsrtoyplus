@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Портфолио — Проф Строй Плюс</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #fff; font-family: 'Segoe UI', sans-serif; color:#222; }
+    .portfolio-img {
+      width: 100%; height: 200px; object-fit: cover;
+      border-radius: 12px; margin-bottom: .5rem;
+      border: 1px solid #e0e0e0; cursor: zoom-in;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: .2s;
+    }
+    .portfolio-img:hover { box-shadow: 0 4px 20px rgba(56,142,60,0.25); }
+    .modal-img-bg {
+      position: fixed; left:0; top:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.85);
+      display:flex; align-items:center; justify-content:center;
+      z-index:2000;
+    }
+    .modal-img-bg img { max-width:90%; max-height:90%; border-radius:12px; }
+    .modal-close-btn {
+      position:absolute; top:20px; right:30px;
+      font-size:2rem; color:#fff; background:none; border:none;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h1 class="text-success text-center mb-4">Портфолио объектов</h1>
+    <div class="row g-4">
+      <!-- Фото 6–20 -->
+      <div class="col-12 col-md-4"><img src="img/photo6.jpg" alt="Объект 6" class="portfolio-img enlargeable"><div class="text-center">Объект 6</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo7.jpg" alt="Объект 7" class="portfolio-img enlargeable"><div class="text-center">Объект 7</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo8.jpg" alt="Объект 8" class="portfolio-img enlargeable"><div class="text-center">Объект 8</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo9.jpg" alt="Объект 9" class="portfolio-img enlargeable"><div class="text-center">Объект 9</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo10.jpg" alt="Объект 10" class="portfolio-img enlargeable"><div class="text-center">Объект 10</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo11.jpg" alt="Объект 11" class="portfolio-img enlargeable"><div class="text-center">Объект 11</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo12.jpg" alt="Объект 12" class="portfolio-img enlargeable"><div class="text-center">Объект 12</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo13.jpg" alt="Объект 13" class="portfolio-img enlargeable"><div class="text-center">Объект 13</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo14.jpg" alt="Объект 14" class="portfolio-img enlargeable"><div class="text-center">Объект 14</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo15.jpg" alt="Объект 15" class="portfolio-img enlargeable"><div class="text-center">Объект 15</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo16.jpg" alt="Объект 16" class="portfolio-img enlargeable"><div class="text-center">Объект 16</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo17.jpg" alt="Объект 17" class="portfolio-img enlargeable"><div class="text-center">Объект 17</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo18.jpg" alt="Объект 18" class="portfolio-img enlargeable"><div class="text-center">Объект 18</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo19.jpg" alt="Объект 19" class="portfolio-img enlargeable"><div class="text-center">Объект 19</div></div>
+      <div class="col-12 col-md-4"><img src="img/photo20.jpg" alt="Объект 20" class="portfolio-img enlargeable"><div class="text-center">Объект 20</div></div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="index.html" class="btn btn-success">⬅ Назад на главную</a>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.enlargeable').forEach(img=>{
+      img.addEventListener('click',()=>{
+        const modal=document.createElement('div');
+        modal.className='modal-img-bg';
+        modal.innerHTML=`<button class=\"modal-close-btn\">×</button><img src=\"${img.src}\" alt=\"${img.alt}\">`;
+        modal.querySelector('.modal-close-btn').onclick=()=>modal.remove();
+        modal.onclick=()=>modal.remove();
+        modal.querySelector('img').onclick=e=>e.stopPropagation();
+        document.body.appendChild(modal);
+      });
+    });
+  </script>
+</body>
+</html>
